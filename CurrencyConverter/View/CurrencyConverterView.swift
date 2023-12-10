@@ -11,54 +11,81 @@ struct CurrencyConverterView: View {
     @ObservedObject private var viewModel = CurrencyViewModel()
     
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Selecionar Moedas")) {
+        ZStack {
+            Color(hex: "#132A13").ignoresSafeArea()
+            
+            VStack {
+                Text("Conversor de Moedas")
+                    .foregroundStyle(Color(hex: "#ECF39E")).bold().font(.title2)
+                
+                Spacer()
+                
+                ZStack {
+                    DashedRectangle(dashedWidth: .constant(350), dashedHeight: .constant(50), dashedColor: .constant("#ECF39E"))
                     Picker("Moeda Base", selection: $viewModel.selectedBaseCurrency) {
                         ForEach(viewModel.currencyRelations.keys.sorted(), id: \.self) { key in
-                            Text("\(key) - \(viewModel.currencyNames[key] ?? "")")
-                                .tag(key)
+                            Text("\(key) - \(viewModel.currencyNames[key] ?? "")").tag(key)
                         }
-                    }.onChange(of: viewModel.selectedBaseCurrency) {
-                        viewModel.updateTargetCurrencyForBaseCurrency()
                     }
-                    
+                    .accentColor(Color(hex: "#ECF39E"))
+                }
+                
+                Spacer()
+                
+                ZStack {
+                    DashedRectangle(dashedWidth: .constant(350), dashedHeight: .constant(50), dashedColor: .constant("#ECF39E"))
                     Picker("Moeda Esperada", selection: $viewModel.selectedTargetCurrency) {
                         ForEach(Array(viewModel.currencyRelations[viewModel.selectedBaseCurrency] ?? []).sorted(), id: \.self) { key in
-                            Text("\(key) - \(viewModel.currencyNames[key] ?? "")")
-                                .tag(key)
+                            Text("\(key) - \(viewModel.currencyNames[key] ?? "")").tag(key)
                         }
                     }
+                    .accentColor(Color(hex: "#ECF39E"))
                 }
                 
-                Section(header: Text("Quantidade para Converter")) {
-                    TextField("Quantidade", text: $viewModel.amountToConvert)
-                        .keyboardType(.decimalPad)
-                }
+                Spacer()
                 
-                Section(header: Text("Total")) {
-                    Text(viewModel.convertedAmount)
-                }
-                
-                Button("Converter") {
-                    viewModel.convertCurrency()
-                }
-                
-                Section {
-                    NavigationLink(destination: ListCurrencyConverterView()) {
-                        Text("Possíveis Conversões")
+                ZStack {
+                    DashedRectangle(dashedWidth: .constant(350), dashedHeight: .constant(60), dashedColor: .constant("#ECF39E"))
+
+                    if viewModel.amountToConvert.isEmpty {
+                        Text("Valor")
+                            .foregroundColor(Color(hex: "#ECF39E"))
+                            .padding(.leading, 10)
                     }
+
+                    TextField("", text: $viewModel.amountToConvert)
+                        .keyboardType(.decimalPad)
+                        .foregroundColor(Color(hex: "#ECF39E"))
+                        .font(.title2)
+                        .padding()
                 }
+
+                Spacer()
                 
+                Text(viewModel.convertedAmount)
+                    .font(.title)
+                    .foregroundStyle(Color(hex: "#ECF39E"))
+
+                Spacer()
+
+                Button(action: viewModel.convertCurrency) {
+                    Text("Converter")
+                        .font(.title2)
+                        .foregroundStyle(Color(hex: "#ECF39E"))
+                }
+                .padding()
+                .background(Color(hex: "#31572C"))
+                .cornerRadius(20)
+
+                Spacer()
             }
-            .onAppear {
-                viewModel.loadCurrencyRelations()
-            }
-            .navigationTitle("Conversor De Moedas")
+            .padding()
+        }
+        .onAppear {
+            viewModel.loadCurrencyRelations(showConvert: false)
         }
     }
 }
-
 
 
 #Preview {

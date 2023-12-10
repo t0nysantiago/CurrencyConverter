@@ -16,10 +16,11 @@ class CurrencyViewModel: ObservableObject {
     @Published var selectedTargetCurrency: String = ""
     @Published var amountToConvert: String = ""
     @Published var convertedAmount: String = ""
+    @Published var convertedAmounts: [String: String] = [:]
     
     private var currencyService = CurrencyService()
     
-    func loadCurrencyRelations() {
+    func loadCurrencyRelations(showConvert: Bool) {
         isLoading = true
         currencyService.fetchCurrencyRelations { [weak self] result in
             DispatchQueue.main.async {
@@ -28,12 +29,22 @@ class CurrencyViewModel: ObservableObject {
                 case .success(let (relations, names)):
                     self?.currencyRelations = relations
                     self?.currencyNames = names
-                    if let firstBaseCurrency = relations.keys.sorted().first {
-                        self?.selectedBaseCurrency = firstBaseCurrency
-                        if let firstTargetCurrency = relations[firstBaseCurrency]?.sorted().first {
-                            self?.selectedTargetCurrency = firstTargetCurrency
+                    if let selectedBase = self?.selectedBaseCurrency, !selectedBase.isEmpty, relations.keys.contains(selectedBase) {
+                    } else {
+                        if relations.keys.contains("BRL") {
+                            self?.selectedBaseCurrency = "BRL"
+                        } else if let firstBaseCurrency = relations.keys.sorted().first {
+                            self?.selectedBaseCurrency = firstBaseCurrency
                         }
                     }
+                    if let firstTargetCurrency = relations[self?.selectedBaseCurrency ?? ""]?.sorted().first {
+                        self?.selectedTargetCurrency = firstTargetCurrency
+                    }
+                    
+                    if(showConvert) {
+                        self?.autoConvertCurrency()
+                    }
+
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                     print("Error: \(error.localizedDescription)")
@@ -41,10 +52,12 @@ class CurrencyViewModel: ObservableObject {
             }
         }
     }
+
+
     
     func convertCurrency() {
-        guard !amountToConvert.isEmpty, let amount = Double(amountToConvert) else {
-            self.convertedAmount = "Invalid input"
+        guard !amountToConvert.isEmpty, let amount = Double(convertNumberStringToDouble(amountToConvert)) else {
+            self.convertedAmount = "Valor Inválido"
             return
         }
         
@@ -52,13 +65,42 @@ class CurrencyViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let rate):
-                    self?.convertedAmount = "\(Double(round(10000000 * amount * rate) / 10000000))"
+                    self?.convertedAmount = formatAsCurrency(amount * rate)
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                 }
             }
         }
     }
+    
+    func autoConvertCurrency() {
+        guard !amountToConvert.isEmpty, let amount = Double(amountToConvert) else {
+            self.convertedAmounts = [:]
+            return
+        }
+        
+        guard let relatedCurrencies = currencyRelations[selectedBaseCurrency] else {
+            return
+        }
+
+        for targetCurrency in relatedCurrencies {
+            currencyService.fetchExchangeRate(from: selectedBaseCurrency, to: targetCurrency) { [weak self] result in
+                DispatchQueue.main.async {
+                    guard let strongSelf = self else { return }
+
+                    let key = strongSelf.selectedBaseCurrency + targetCurrency
+                    switch result {
+                    case .success(let rate):
+                        strongSelf.convertedAmounts[key] = formatAsCurrency(amount * rate)
+                    case .failure(let error):
+                        strongSelf.convertedAmounts[key] = "Error: \(error.localizedDescription)"
+                    }
+                }
+            }
+        }
+    }
+
+
     
     func updateTargetCurrencyForBaseCurrency() {
         if let targetCurrencies = currencyRelations[selectedBaseCurrency],

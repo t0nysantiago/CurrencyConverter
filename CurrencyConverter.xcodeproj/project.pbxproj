@@ -8,23 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		EAA9E8AC2B2134C400E41B1E /* CurrencyConverterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9E8AB2B2134C400E41B1E /* CurrencyConverterApp.swift */; };
-		EAA9E8AE2B2134C400E41B1E /* ListCurrencyConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9E8AD2B2134C400E41B1E /* ListCurrencyConverterView.swift */; };
+		EAA9E8AE2B2134C400E41B1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9E8AD2B2134C400E41B1E /* ContentView.swift */; };
 		EAA9E8B02B2134C600E41B1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAA9E8AF2B2134C600E41B1E /* Assets.xcassets */; };
 		EAA9E8B32B2134C600E41B1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAA9E8B22B2134C600E41B1E /* Preview Assets.xcassets */; };
 		EAA9E8C22B21D46000E41B1E /* CurrencyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9E8C12B21D46000E41B1E /* CurrencyConverter.swift */; };
 		EAA9E8C42B21D4C100E41B1E /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9E8C32B21D4C100E41B1E /* CurrencyViewModel.swift */; };
 		EAA9E8C62B21D8E000E41B1E /* CurrencyConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9E8C52B21D8E000E41B1E /* CurrencyConverterView.swift */; };
+		EAA9E8C92B237A6700E41B1E /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9E8C82B237A6700E41B1E /* HexColor.swift */; };
+		EAA9E8CC2B23B08100E41B1E /* DashedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9E8CB2B23B08100E41B1E /* DashedRectangle.swift */; };
+		EAA9E8CE2B23B68A00E41B1E /* FormatValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9E8CD2B23B68A00E41B1E /* FormatValue.swift */; };
+		EAA9E8D02B23BC1400E41B1E /* ListCurrencyRelationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9E8CF2B23BC1400E41B1E /* ListCurrencyRelationsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EAA9E8A82B2134C400E41B1E /* CurrencyConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA9E8AB2B2134C400E41B1E /* CurrencyConverterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterApp.swift; sourceTree = "<group>"; };
-		EAA9E8AD2B2134C400E41B1E /* ListCurrencyConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCurrencyConverterView.swift; sourceTree = "<group>"; };
+		EAA9E8AD2B2134C400E41B1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EAA9E8AF2B2134C600E41B1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAA9E8B22B2134C600E41B1E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EAA9E8C12B21D46000E41B1E /* CurrencyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverter.swift; sourceTree = "<group>"; };
 		EAA9E8C32B21D4C100E41B1E /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
 		EAA9E8C52B21D8E000E41B1E /* CurrencyConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterView.swift; sourceTree = "<group>"; };
+		EAA9E8C82B237A6700E41B1E /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
+		EAA9E8CB2B23B08100E41B1E /* DashedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedRectangle.swift; sourceTree = "<group>"; };
+		EAA9E8CD2B23B68A00E41B1E /* FormatValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatValue.swift; sourceTree = "<group>"; };
+		EAA9E8CF2B23BC1400E41B1E /* ListCurrencyRelationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCurrencyRelationsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +65,7 @@
 		EAA9E8AA2B2134C400E41B1E /* CurrencyConverter */ = {
 			isa = PBXGroup;
 			children = (
+				EAA9E8C72B237A5200E41B1E /* Utils */,
 				EAA9E8BF2B21D42D00E41B1E /* View */,
 				EAA9E8BE2B21D3FD00E41B1E /* ViewModel */,
 				EAA9E8BD2B21D3F700E41B1E /* Model */,
@@ -94,10 +103,29 @@
 		EAA9E8BF2B21D42D00E41B1E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				EAA9E8AD2B2134C400E41B1E /* ListCurrencyConverterView.swift */,
+				EAA9E8CA2B23B05300E41B1E /* Component */,
+				EAA9E8AD2B2134C400E41B1E /* ContentView.swift */,
 				EAA9E8C52B21D8E000E41B1E /* CurrencyConverterView.swift */,
+				EAA9E8CF2B23BC1400E41B1E /* ListCurrencyRelationsView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EAA9E8C72B237A5200E41B1E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EAA9E8C82B237A6700E41B1E /* HexColor.swift */,
+				EAA9E8CD2B23B68A00E41B1E /* FormatValue.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		EAA9E8CA2B23B05300E41B1E /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				EAA9E8CB2B23B08100E41B1E /* DashedRectangle.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,9 +198,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAA9E8CC2B23B08100E41B1E /* DashedRectangle.swift in Sources */,
 				EAA9E8C22B21D46000E41B1E /* CurrencyConverter.swift in Sources */,
+				EAA9E8D02B23BC1400E41B1E /* ListCurrencyRelationsView.swift in Sources */,
+				EAA9E8C92B237A6700E41B1E /* HexColor.swift in Sources */,
 				EAA9E8C42B21D4C100E41B1E /* CurrencyViewModel.swift in Sources */,
-				EAA9E8AE2B2134C400E41B1E /* ListCurrencyConverterView.swift in Sources */,
+				EAA9E8AE2B2134C400E41B1E /* ContentView.swift in Sources */,
+				EAA9E8CE2B23B68A00E41B1E /* FormatValue.swift in Sources */,
 				EAA9E8AC2B2134C400E41B1E /* CurrencyConverterApp.swift in Sources */,
 				EAA9E8C62B21D8E000E41B1E /* CurrencyConverterView.swift in Sources */,
 			);
