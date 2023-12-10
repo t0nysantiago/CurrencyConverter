@@ -7,7 +7,7 @@ CurrencyConverter is a user-friendly currency conversion app developed in Swift 
 - **Multi-Currency Support**: Utilizes a robust API to offer a wide range of currency conversion options.
 - **Real-Time Conversion Rates**: Fetches the latest conversion rates between two selected currencies.
 - **User Interface**: Boasts a clean, intuitive interface, making it easy for users to navigate and perform conversions.
-- **Efficient Data Fetching**: Employs two `usefetch` calls; one to retrieve all possible conversions in XML format, and another to get the current exchange rate between two currencies.
+- **Efficient Data Fetching**: Employs two `fetch` calls; one to retrieve all possible conversions in XML format, and another to get the current exchange rate between two currencies.
 
 ## Installation
 To access the CurrencyConverter app, follow these steps:
