@@ -20,46 +20,54 @@ struct CurrencyConverterView: View {
                 
                 Spacer()
                 
-                ZStack {
-                    DashedRectangle(dashedWidth: .constant(350), dashedHeight: .constant(50), dashedColor: .constant("#ECF39E"))
-                    Picker("Moeda Base", selection: $viewModel.selectedBaseCurrency) {
-                        ForEach(viewModel.currencyRelations.keys.sorted(), id: \.self) { key in
-                            Text("\(key) - \(viewModel.currencyNames[key] ?? "")").tag(key)
+                HStack {
+                    VStack(alignment: .center) {
+                        Text("Moeda Base")
+                            .foregroundStyle(Color(hex: "#ECF39E"))
+                            .padding(.bottom, 30)
+                        Picker("Moeda Base", selection: $viewModel.selectedBaseCurrency) {
+                            ForEach(viewModel.currencyRelations.keys.sorted(), id: \.self) { key in
+                                    Text("\(key) ").tag(key)
+                            }
                         }
-                    }
-                    .accentColor(Color(hex: "#ECF39E"))
+                        .accentColor(Color(hex: "#ECF39E"))
+                    }.fixedSize()
+
+                    Spacer()
+
+                    VStack(alignment: .center) {
+                        Text("Moeda Esperada")
+                            .foregroundStyle(Color(hex: "#ECF39E"))
+                            .padding(.bottom, 30)
+                        Picker("Moeda Esperada", selection: $viewModel.selectedTargetCurrency) {
+                            ForEach(Array(viewModel.currencyRelations[viewModel.selectedBaseCurrency] ?? []).sorted(), id: \.self) { key in
+                                    Text("\(key) ").tag(key)
+                            }
+                        }
+                        .accentColor(Color(hex: "#ECF39E"))
+                    }.fixedSize()
                 }
-                
+
                 Spacer()
                 
-                ZStack {
-                    DashedRectangle(dashedWidth: .constant(350), dashedHeight: .constant(50), dashedColor: .constant("#ECF39E"))
-                    Picker("Moeda Esperada", selection: $viewModel.selectedTargetCurrency) {
-                        ForEach(Array(viewModel.currencyRelations[viewModel.selectedBaseCurrency] ?? []).sorted(), id: \.self) { key in
-                            Text("\(key) - \(viewModel.currencyNames[key] ?? "")").tag(key)
-                        }
-                    }
-                    .accentColor(Color(hex: "#ECF39E"))
-                }
-                
-                Spacer()
-                
-                ZStack {
-                    DashedRectangle(dashedWidth: .constant(350), dashedHeight: .constant(60), dashedColor: .constant("#ECF39E"))
-
-                    if viewModel.amountToConvert.isEmpty {
-                        Text("Valor")
-                            .foregroundColor(Color(hex: "#ECF39E"))
-                            .padding(.leading, 10)
-                    }
-
+                VStack (alignment: .leading){
+                    Text("Valor para Conversão")
+                        .foregroundStyle((Color(hex: "#ECF39E")))
+                    
                     TextField("", text: $viewModel.amountToConvert)
                         .keyboardType(.decimalPad)
-                        .foregroundColor(Color(hex: "#ECF39E"))
-                        .font(.title2)
+                        .font(.title3)
+                        .foregroundStyle(Color(hex: "#ECF39E"))
                         .padding()
+                        .overlay(
+                            Rectangle()
+                                .frame(height: 2)
+                                .offset(y: 5),
+                            alignment: .bottom
+                        )
                 }
 
+                
                 Spacer()
                 
                 Text(viewModel.convertedAmount)
@@ -76,10 +84,9 @@ struct CurrencyConverterView: View {
                 .padding()
                 .background(Color(hex: "#31572C"))
                 .cornerRadius(20)
-
-                Spacer()
             }
             .padding()
+            .padding(.horizontal, 30)
         }
         .onAppear {
             viewModel.loadCurrencyRelations(showConvert: false)

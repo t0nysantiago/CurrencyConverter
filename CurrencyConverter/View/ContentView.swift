@@ -62,7 +62,7 @@ struct ContentView: View {
                                 .font(.title2)
                                 .foregroundStyle(Color(hex: "#ECF39E"))
                             
-                            Text("Converter")
+                            Text("Conversor Direto")
                                 .font(.title2)
                                 .foregroundStyle(Color(hex: "#ECF39E"))
                         }
