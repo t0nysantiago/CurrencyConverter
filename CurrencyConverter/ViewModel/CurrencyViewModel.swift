@@ -56,7 +56,7 @@ class CurrencyViewModel: ObservableObject {
 
     
     func convertCurrency() {
-        guard !amountToConvert.isEmpty, let amount = Double(amountToConvert) else {
+        guard !amountToConvert.isEmpty, let amount = Double(convertToDecimalFormat(amountToConvert)) else {
             self.convertedAmount = "Valor Inválido"
             return
         }

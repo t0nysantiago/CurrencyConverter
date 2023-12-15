@@ -22,3 +22,7 @@ func formatAsCurrency(_ number: Double) -> String {
         return "Formato inválido"
     }
 }
+
+func convertToDecimalFormat(_ numberString: String) -> String {
+    return numberString.replacingOccurrences(of: ",", with: ".")
+}
